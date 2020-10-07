@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- End Responsive -->
+    <link rel="icon" href="./assets/favicon.ico" sizes="32x32" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/css/calcite-web.min.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.17/esri/css/main.css">
+    <link rel="stylesheet" href="./styles/main_small.css">
+    <script>
+      const projectPath = location.pathname.replace(/\/[^\/]+$/, "");
+      window.dojoConfig = {
+        packages: [
+          { name: "calcite", location: "https://s3-us-west-1.amazonaws.com/patterns.esri.com/files/calcite-web/1.2.5/js", main: "calcite-web.min" },
+          { name: "addons", location: "https://esri-audubon.s3.us-west-1.amazonaws.com/v1/" },
+          { name: 'app', location: `${projectPath}/app`, main: 'main' }
+        ]
+      }
+    </script>
+    <script src="https://js.arcgis.com/4.17/"></script>
+    <script>require(["app/main_small"]);</script>
+  </head>
+  <body class="">
+
+    <!-- APP DETAILS -->
+    <div class="js-modal modal-overlay" data-modal="app-details-dialog">
+      <div class="modal-content column-14" aria-labelledby="modal" role="dialog">
+        <div class="modal-content-row trailer-half">
+          <div class="font-size-3 text-blue">Audubon Annual Cycle</div>
+          <div class="js-modal-toggle esri-interactive icon-ui-close" aria-label="close-modal"></div>
+        </div>
+        <div class="panel trailer-half">
+          Display annual migration cycles of various bird species...
+        </div>
+        <div class="modal-content-row leader-1">
+          <img src="./assets/esri_science_of_where.png" class="left">
+          <div class="modal-content-row">
+            <label class="modal-content-row trailer-0 margin-right-1">
+              <div class="inline-block font-size--2">hide on startup&nbsp;</div>
+              <input id="hide-startup-input" type="checkbox" style="vertical-align:middle;">
+            </label>
+            <button class="btn js-modal-toggle">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIES DIALOG -->
+    <div class="js-modal modal-overlay" data-modal="species-dialog">
+      <div class="modal-content" aria-labelledby="modal" role="dialog">
+        <div class="modal-content-row trailer-quarter">
+          <div id="species-big-title" class="font-size-5">Audubon Annual Cycle</div>
+          <div id="species-big-close" class="js-modal-toggle esri-interactive icon-ui-close" aria-label="close-modal"></div>
+        </div>
+        <div id="species-big-center-container">
+          <div id="species-big-panel" class="panel panel-white panel-no-padding">
+            <div id="species-big-view">
+              <div id="species-big-btn" class="species-play-btn icon-ui-play icon-ui-flush text-white font-size-6" title="toggle animation"></div>
+            </div>
+          </div>
+          <div id="species-big-side-panel" class="panel panel-white panel-no-padding panel-no-border margin-left-half column-5">
+            <div id="current-date-label" class="text-center font-size-5">
+              <span class="font-size-1 avenir-italic text-dark-gray">Loading...</span>
+            </div>
+            <div id="info-container" class="panel panel-white leader-quarter"></div>
+            <button id="species-big-more-details-btn" class="btn btn-green btn-fill leader-quarter">View More Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header id="header-panel" class="panel-black">
+      <div class="font-size-3">Migratory Bird Initiative</div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div id="main-container" class="panel-black">
+      <div id="center-panel" class="panel panel-no-padding panel-no-border">
+        <div id="species-panel" class="panel panel-white panel-no-border">
+          <div class="font-size-3 margin-left-3 text-center">Species</div>
+          <div id="species-container" class="items-container panel panel-white panel-no-border"></div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
